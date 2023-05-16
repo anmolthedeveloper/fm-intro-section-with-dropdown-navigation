@@ -12,6 +12,7 @@
       href="./images/favicon-32x32.png"
     />
     <link rel="stylesheet" href="./output.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,27 +25,102 @@
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   </head>
-  <body class="bg-almostWhite font-epilogue">
-    <nav class="flex justify-between items-center p-4">
-      <div class="flex items-center">
-        <img src="./images/logo.svg" alt="logo" class="mr-4" />
-        <ul class="hidden sm:flex">
-          <li>Features</li>
-          <li>Company</li>
-          <li>Careers</li>
-          <li>About</li>
-        </ul>
-      </div>
-      <div class="flex">
-        <ul class="hidden sm:flex">
-          <li>Login</li>
-          <li>Register</li>
-        </ul>
-        <img
-          src="./images/icon-menu.svg"
-          alt="hamburger icon"
-          class="flex sm:hidden h-4"
-        />
+  <body class="bg-almostWhite font-epilogue relative">
+    <div
+      id="background"
+      class="hidden w-[100vw] h-[100vh] bg-black/60 fixed"
+    ></div>
+    <nav class="flex items-center p-4">
+      <img src="./images/logo.svg" alt="logo" class="mr-4" />
+      <div
+        class="flex items-center sm:justify-between justify-end w-full relative"
+      >
+        <div class="flex sm:hidden items-center h-4 z-10" id="menuBurgerParent">
+          <img
+            src="./images/icon-menu.svg"
+            id="menuBurger"
+            alt="hamburger icon"
+          />
+        </div>
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:w-full"
+          id="menuParent"
+        >
+          <ul class="hidden sm:flex menuItems sm:relative">
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 flex items-center hover:text-black"
+              id="features"
+            >
+              <p>Features</p>
+              <div class="w-7 h-2 ml-3">
+                <img src="./images/icon-arrow-down.svg" id="featuresArrowImg" />
+              </div>
+            </li>
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 sm:mx-4 ml-5 hidden sm:absolute sm:bg-white sm:top-10 sm:left-[-4rem] sm:px-4 sm:shadow-lg rounded-md py-3"
+              id="featuresSubMenu"
+            >
+              <div class="flex items-center mb-3">
+                <img src="./images/icon-todo.svg" />
+                <p class="ml-3">Todo List</p>
+              </div>
+              <div class="flex items-center mb-3">
+                <img src="./images/icon-calendar.svg" />
+                <p class="ml-3">Calender</p>
+              </div>
+              <div class="flex items-center mb-3">
+                <img src="./images/icon-reminders.svg" />
+                <p class="ml-3">Reminders</p>
+              </div>
+              <div class="flex items-center">
+                <img src="./images/icon-planning.svg" />
+                <p class="ml-3">Planning</p>
+              </div>
+            </li>
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 flex items-center hover:text-black"
+              id="company"
+            >
+              <p>Company</p>
+              <div class="w-7 h-2 ml-3">
+                <img src="./images/icon-arrow-down.svg" id="companyArrowImg" />
+              </div>
+            </li>
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 sm:mx-4 ml-5 hidden sm:absolute sm:bg-white sm:top-10 sm:left-[6rem] sm:px-4 sm:shadow-lg rounded-md py-3"
+              id="companySubMenu"
+            >
+              <p class="mb-3">History</p>
+              <p class="mb-3">Our Team</p>
+              <p>Blog</p>
+            </li>
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 sm:mx-4 hover:text-black"
+            >
+              Careers
+            </li>
+            <li
+              class="text-sm text-almostGray my-5 sm:my-0 sm:mx-4 hover:text-black"
+            >
+              About
+            </li>
+          </ul>
+          <ul
+            class="hidden sm:flex menuItems text-center items-center"
+            id="loginRegisterParent"
+          >
+            <li
+              class="text-sm text-almostGray my-3 sm:my-0 sm:mr-4 hover:text-black"
+            >
+              Login
+            </li>
+            <li
+              class="border-solid border-2 border-almostGray rounded-xl p-2 text-sm text-almostGray hover:text-black hover:border-black px-4"
+            >
+              Register
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <img
@@ -58,9 +134,11 @@
         Get your team in sync, no matter your location. Streamline processes,
         create team rituals, and watch productivity soar.
       </p>
-      <div class="w-28 py-2 bg-black rounded-xl m-auto">
-        <p class="text-white text-sm">Learn more</p>
-      </div>
+      <p
+        class="text-white text-sm w-28 py-2 bg-black rounded-xl m-auto hover:bg-almostWhite hover:text-black"
+      >
+        Learn more
+      </p>
       <div class="flex flex-wrap justify-between mt-9">
         <img
           src="./images/client-databiz.svg"
@@ -84,5 +162,115 @@
         />
       </div>
     </div>
+    <script>
+      var menuBurger = $("#menuBurger");
+      var menuItems = $(".menuItems");
+      var menuParent = $("#menuParent");
+      var background = $("#background");
+      var menuBurgerParent = $("#menuBurgerParent");
+      var loginRegisterParent = $("#loginRegisterParent");
+
+      var features = $("#features");
+      var featuresSubMenu = $("#featuresSubMenu");
+      var company = $("#company");
+      var companySubMenu = $("#companySubMenu");
+      var featuresArrowImg = $("#featuresArrowImg");
+      var companyArrowImg = $("#companyArrowImg");
+      var isFeatureOpened = false;
+      var isCompanyOpened = false;
+
+      var isMenuOpened = false;
+
+      // Temp turned on for development
+      //developmentSetting();
+      // End Temp setting
+
+      function developmentSetting() {
+        isMenuOpened = true;
+        openMenu();
+      }
+
+      $(document).ready(function () {
+        // Store the initial screen width
+        var initialWidth = $(window).width();
+
+        // Bind the resize event
+        $(window).resize(function () {
+          var currentWidth = $(window).width();
+          if (currentWidth >= 640 && isMenuOpened) {
+            isMenuOpened = false;
+            closeAllMenus();
+            initialWidth = currentWidth;
+          }
+        });
+      });
+      menuBurger.click(() => {
+        isMenuOpened ? closeMenu() : openMenu();
+        isMenuOpened = !isMenuOpened;
+      });
+
+      function openMenu() {
+        menuBurger.attr("src", "./images/icon-close-menu.svg");
+        menuItems.removeClass("hidden");
+        menuParent.addClass("fixed");
+        menuParent.addClass("bg-almostWhite");
+        menuParent.addClass("top-0");
+        menuParent.addClass("right-0");
+        menuParent.addClass("pt-10");
+        menuParent.addClass("p-5");
+        menuParent.addClass("h-[100vh]");
+        menuParent.addClass("w-2/3");
+        background.removeClass("hidden");
+        menuBurgerParent.addClass("fixed");
+        // loginRegisterParent.addClass("w-full");
+      }
+
+      function closeMenu() {
+        menuBurger.attr("src", "./images/icon-menu.svg");
+        menuItems.addClass("hidden");
+        menuParent.removeClass("fixed");
+        menuParent.removeClass("bg-almostWhite");
+        menuParent.removeClass("top-0");
+        menuParent.removeClass("right-0");
+        menuParent.removeClass("pt-10");
+        menuParent.removeClass("p-5");
+        menuParent.removeClass("h-[100vh]");
+        menuParent.removeClass("w-2/3");
+        background.addClass("hidden");
+        menuBurgerParent.removeClass("fixed");
+      }
+
+      function closeAllMenus() {
+        closeMenu();
+        featuresArrowImg.attr("src", "./images/icon-arrow-down.svg");
+        featuresSubMenu.addClass("hidden");
+        companyArrowImg.attr("src", "./images/icon-arrow-down.svg");
+        companySubMenu.addClass("hidden");
+        isCompanyOpened = false;
+        isFeatureOpened = false;
+      }
+
+      features.click(() => {
+        if (!isFeatureOpened) {
+          featuresArrowImg.attr("src", "./images/icon-arrow-up.svg");
+          featuresSubMenu.removeClass("hidden");
+        } else {
+          featuresArrowImg.attr("src", "./images/icon-arrow-down.svg");
+          featuresSubMenu.addClass("hidden");
+        }
+        isFeatureOpened = !isFeatureOpened;
+      });
+
+      company.click(() => {
+        if (!isCompanyOpened) {
+          companyArrowImg.attr("src", "./images/icon-arrow-up.svg");
+          companySubMenu.removeClass("hidden");
+        } else {
+          companyArrowImg.attr("src", "./images/icon-arrow-down.svg");
+          companySubMenu.addClass("hidden");
+        }
+        isCompanyOpened = !isCompanyOpened;
+      });
+    </script>
   </body>
 </html>
