@@ -730,6 +730,9 @@ video {
 .h-\[80vh\] {
   height: 80vh;
 }
+.h-\[50vh\] {
+  height: 50vh;
+}
 .w-1\/5 {
   width: 20%;
 }
@@ -747,6 +750,9 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.w-\[50vw\] {
+  width: 50vw;
 }
 .flex-shrink {
   flex-shrink: 1;
